@@ -24,7 +24,7 @@ infile = open('Kraken2_LT_2024_taxonomic_results_new.txt')
 read = infile.readlines()
 outfile = open('merged_taxonomy_new1.txt', 'w')
 
-# 写入列名
+# Write column headers
 column_names = ['Annotation_Status', 'Gene', 'Domain', 'Kingdom', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species', 'Strain']
 outfile.write('\t'.join(column_names) + '\n')
 
@@ -65,9 +65,9 @@ for line in read:
         else:
             taxonomy = '\t'.join(['BAD_TAXON'] * len(levels))
 
-        # 将 Species 列的内容只保留空格前的部分
+        # Keep only the part before the space in the Species column
         taxonomy_columns = taxonomy.split('\t')
-        if taxonomy_columns[7] != 'NA':  # 如果 Species 列不为空白
+        if taxonomy_columns[7] != 'NA':  # If the Species column is not blank
             taxonomy_columns[7] = taxonomy_columns[7].split(' ')[0]
         taxonomy = '\t'.join(taxonomy_columns)
 
@@ -76,4 +76,3 @@ for line in read:
     outfile.write(total + '\n')
 
 outfile.close()
-
